@@ -20,15 +20,18 @@ class SafeguardController extends Controller
     {
         //
         $filter = new SafeguardsFilter();
-        $queryItems = $filter->transform($request); // [['column', 'operator', 'value']]
+        $filterItems = $filter->transform($request); // [['column', 'operator', 'value']]
 
 
-        if(count($queryItems) == 0) {
-            return new SafeguardCollection(Safeguard::all());
-        } else {
-            $safeguards = Safeguard::where($queryItems)->all();
-            return new SafeguardCollection($safeguards->appends($request->query()));
-        }
+        $includeSteps = $request->query('includeSteps');
+
+        $safeguards = Safeguard::where($filterItems);
+
+//        if($includeSteps) {
+//            $safeguards = $safeguards;
+//        }
+
+        return new SafeguardCollection($safeguards->paginate()->appends($request->query()));
 
 
 //        return new StepCollection(Job::paginate());

@@ -18,7 +18,8 @@ class HazardResource extends JsonResource
         return [
             'id' => $this->id,
             'stepId' => $this->step_id,
-            'title' => $this->title
+            'title' => $this->title,
+            'safeguards' => SafeguardResource::collection($this->whenLoaded('hazards'))
         ];
     }
 }

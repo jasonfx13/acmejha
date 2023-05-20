@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\api\v1\HazardController;
 use App\Http\Controllers\api\v1\JobController;
+use App\Http\Controllers\api\v1\SafeguardController;
 use App\Http\Controllers\api\v1\StepController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -25,4 +27,6 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\api\v1'], f
     Route::resource('steps', StepController::class);
     Route::resource('hazards', HazardController::class);
     Route::resource('safeguards', SafeGuardController::class);
+
+    Route::post('steps/bulk', ['uses' => 'StepController@bulkstore']);
 });

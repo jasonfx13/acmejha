@@ -14,7 +14,7 @@ class JobsFilter extends ApiFilter {
 
     protected $columnMap = [
         'createdDate' => 'created_at',
-        'enteredBy' => 'author'
+        'createcBy' => 'created_by'
     ];
 
     protected $operatorMap = [

@@ -20,15 +20,25 @@ class HazardController extends Controller
     {
         //
         $filter = new HazardsFilter();
-        $queryItems = $filter->transform($request); // [['column', 'operator', 'value']]
+        $filterItems = $filter->transform($request); // [['column', 'operator', 'value']]
 
 
-        if(count($queryItems) == 0) {
-            return new HazardCollection(Hazard::all());
-        } else {
-            $hazards = Hazard::where($queryItems)->all();
-            return new HazardCollection($hazards->appends($request->query()));
-        }
+        // $includeSteps = $request->query('includeSteps');
+
+        $hazards = Hazard::where($filterItems)->with('safeguards');
+
+        //if($includeSteps) {
+           // $hazards = $hazards->with('safeguards');
+       // }
+
+        return new HazardCollection($hazards->paginate()->appends($request->query()));
+
+//        if(count($queryItems) == 0) {
+//            return new HazardCollection(Hazard::all());
+//        } else {
+//            $hazards = Hazard::where($queryItems)->all();
+//            return new HazardCollection($hazards->appends($request->query()));
+//        }
 
 
 //        return new StepCollection(Job::paginate());

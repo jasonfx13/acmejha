@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\api\v1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreJobRequest;
-use App\Http\Requests\UpdateJobRequest;
+use App\Http\Requests\V1\StoreJobRequest;
+use App\Http\Requests\V1\UpdateJobRequest;
 use App\Http\Resources\V1\JobCollection;
 use App\Http\Resources\V1\JobResource;
 use App\Models\Job;
@@ -26,21 +26,14 @@ class JobController extends Controller
 
         $jobs = Job::where($filterItems);
 
+
         if($includeSteps) {
-            $jobs = $jobs->with('steps');
+//            $jobs = $jobs->with('steps')->with('hazards')->with('safeguards');
+            $jobs = $jobs->with('steps')->with('hazards')->with('safeguards');
         }
 
         return new JobCollection($jobs->paginate()->appends($request->query()));
 
-//        if(count($filterItems) == 0) {
-//            return new JobCollection(Job::paginate());
-//        } else {
-//            $jobs = Job::where($filterItems)->paginate();
-//            return new JobCollection($jobs->appends($request->query()));
-//        }
-
-
-//        return new JobCollection(Job::paginate());
     }
 
     /**
@@ -57,6 +50,7 @@ class JobController extends Controller
     public function store(StoreJobRequest $request)
     {
         //
+        return new JobResource(Job::create($request->all()));
     }
 
     /**
@@ -86,7 +80,7 @@ class JobController extends Controller
      */
     public function update(UpdateJobRequest $request, Job $job)
     {
-        //
+        $job->update($request->all());
     }
 
     /**
