@@ -19,8 +19,7 @@ class StepCollection extends ResourceCollection
             'id' => $this->id,
             'jobId' => $this->job_id,
             'title' => $this->title,
-//            'hazards' => HazardResource::collection($this->whenLoaded('hazards'))
-            'hazards' => $this->hazards
+            'hazards' => HazardResource::collection($this->hazards)
         ];
     }
 }

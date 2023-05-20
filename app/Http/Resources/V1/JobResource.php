@@ -16,16 +16,12 @@ class JobResource extends JsonResource
     {
         //return parent::toArray($request);
 
-        $steps = StepResource::collection($this->whenLoaded('steps'));
-        $hazards = HazardResource::collection($this->whenLoaded('hazards'));
-        $safeguards = SafeguardResource::collection($this->whenLoaded('safeguards'));
-
         return [
             'id' => $this->id,
             'title' => $this->title,
             'createdBy' => $this->created_by,
             'dateEntered' => $this->created_at,
-            'steps' => $steps
+            'steps' => StepResource::collection($this->whenLoaded('steps'))
         ];
     }
 }

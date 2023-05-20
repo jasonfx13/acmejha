@@ -19,7 +19,7 @@ class SafeguardResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'hazardId' => $this->hazard_id,
-            'dateEntered' => $this->created_at
+//            'dateEntered' => $this->created_at
         ];
     }
 }
