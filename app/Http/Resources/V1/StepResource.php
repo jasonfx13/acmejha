@@ -19,7 +19,7 @@ class StepResource extends JsonResource
             'id' => $this->id,
             'jobId' => $this->job_id,
             'title' => $this->title,
-            'hazards' => HazardResource::collection($this->whenLoaded('hazards'))
+            'hazards' => HazardResource::collection($this->hazards)
         ];
     }
 

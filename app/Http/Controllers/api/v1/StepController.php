@@ -26,7 +26,11 @@ class StepController extends Controller
 
         $includeSteps = $request->query('includeSteps');
 
-        $steps = Step::where($filterItems)->with('hazards');
+//        $steps = Step::where($filterItems)->with('hazards');
+
+        $steps = Step::with(['hazards']);
+
+
 
 //        if($includeSteps) {
 //            $steps = $steps->with('hazards');

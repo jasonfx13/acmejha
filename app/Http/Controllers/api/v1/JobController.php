@@ -29,7 +29,7 @@ class JobController extends Controller
 
         if($includeSteps) {
 //            $jobs = $jobs->with('steps')->with('hazards')->with('safeguards');
-            $jobs = $jobs->with('steps')->with('hazards')->with('safeguards');
+            $jobs = Job::with(['steps']);
         }
 
         return new JobCollection($jobs->paginate()->appends($request->query()));
