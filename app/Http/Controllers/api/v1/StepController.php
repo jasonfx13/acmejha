@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers\api\v1;
 
-use App\Filters\V1\StepsFilter;
+
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreStepRequest;
-use App\Http\Requests\UpdateStepRequest;
+use App\Http\Requests\V1\BulkStoreStepRequest;
+use App\Http\Requests\V1\BulkUpdateSteps;
+use App\Http\Requests\V1\StoreStepRequest;
+use App\Http\Requests\V1\UpdateStepRequest;
 use App\Http\Resources\V1\StepCollection;
 use App\Http\Resources\V1\StepResource;
 use App\Models\Step;
+use App\Filters\V1\StepsFilter;
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Arr;
-use App\Http\Requests\V1\BulkStoreStepRequest;
 
 class StepController extends Controller
 {
@@ -23,31 +26,16 @@ class StepController extends Controller
         //
         $filter = new StepsFilter();
         $filterItems = $filter->transform($request); // [['column', 'operator', 'value']]
-
         $includeSteps = $request->query('includeSteps');
+//        $steps = Step::with(['hazards']);
+        $steps = Step::where($filterItems);
 
-//        $steps = Step::where($filterItems)->with('hazards');
+        if($includeSteps) {
+            $steps = Step::with(['steps']);
+        }
 
-        $steps = Step::with(['hazards']);
-
-
-
-//        if($includeSteps) {
-//            $steps = $steps->with('hazards');
-//        }
-
+//        return new StepCollection($steps->paginate()->appends($request->query()));
         return new StepCollection($steps->paginate()->appends($request->query()));
-
-//
-//        if(count($filterItems) == 0) {
-//            return new StepCollection(Step::all());
-//        } else {
-//            $steps = Step::where($filterItems)->all();
-//            return new StepCollection($steps->appends($request->query()));
-//        }
-
-
-//        return new StepCollection(Job::paginate());
     }
 
     /**
@@ -65,10 +53,21 @@ class StepController extends Controller
     public function store(StoreStepRequest $request)
     {
         //
+        return new StepResource(Step::create($request->all()));
     }
 
 
     public function bulkStore(BulkStoreStepRequest $request) {
+        $bulk = collect($request->all())->map(function($arr, $key) {
+            return Arr::except($arr, ['jobId']);
+        });
+
+        Step::insert($bulk->toArray());
+
+        return $bulk;
+    }
+
+    public function bulkPatch(BulkUpdateSteps $request) {
         $bulk = collect($request->all())->map(function($arr, $key) {
             return Arr::except($arr, ['jobId']);
         });
@@ -99,6 +98,7 @@ class StepController extends Controller
     public function update(UpdateStepRequest $request, Step $step)
     {
         //
+        $step->update($request->all());
     }
 
     /**
@@ -107,5 +107,7 @@ class StepController extends Controller
     public function destroy(Step $step)
     {
         //
+        $step->hasMany(Hazard::class)->delete();
+        $step->delete();
     }
 }

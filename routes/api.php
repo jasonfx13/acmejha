@@ -29,4 +29,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\api\v1'], f
     Route::resource('safeguards', SafeGuardController::class);
 
     Route::post('steps/bulk', ['uses' => 'StepController@bulkstore']);
+    Route::patch('steps/bulk', ['uses' => 'StepController@bulkpatch']);
+    Route::post('hazards/bulk', ['uses' => 'HazardController@bulkstore']);
+    Route::post('safeguards/bulk', ['uses' => 'SafeguardController@bulkstore']);
 });

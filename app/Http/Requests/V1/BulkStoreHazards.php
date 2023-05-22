@@ -5,7 +5,7 @@ namespace App\Http\Requests\V1;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreJobRequest extends FormRequest
+class BulkStoreHazards extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,16 +24,21 @@ class StoreJobRequest extends FormRequest
     {
         return [
             //
-            'title' => ['required'],
-            'description' => ['nullable'],
-            'createdBy' => ['required']
+            '*.stepId' => ['required', 'integer'],
+            '*.title' => ['required', 'string']
         ];
     }
 
     protected function prepareForValidation()
     {
-        $this->merge([
-            'created_by' => $this->createdBy
-        ]);
+        $data = [];
+
+        foreach ($this->toArray() as $obj) {
+            $obj['step_id'] = $obj['stepId'] ?? null;
+
+            $data[] = $obj;
+        }
+
+        $this->merge($data);
     }
 }

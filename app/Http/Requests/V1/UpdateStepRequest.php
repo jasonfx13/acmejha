@@ -5,7 +5,7 @@ namespace App\Http\Requests\V1;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpdateJobRequest extends FormRequest
+class UpdateStepRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,25 +28,22 @@ class UpdateJobRequest extends FormRequest
             return [
                 //
                 'title' => ['required'],
-                'description' => ['nullable'],
-                'createdBy' => ['required']
+                'jobId' => ['required']
             ];
         } else {
             return [
                 //
                 'title' => ['sometimes', 'required'],
-                'description' => ['nullable'],
-                'createdBy' => ['sometimes', 'required']
+                'jobId' => ['sometimes', 'required']
             ];
         }
-
     }
 
     protected function prepareForValidation()
     {
-        if($this->createdBy) {
+        if($this->jobId) {
             $this->merge([
-                'created_by' => $this->createdBy
+                'job_id' => $this->jobId
             ]);
         }
 

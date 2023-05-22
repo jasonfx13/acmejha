@@ -19,6 +19,7 @@ class JobResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
+            'description' => $this->description,
             'createdBy' => $this->created_by,
             'dateEntered' => $this->created_at,
             'steps' => StepResource::collection($this->whenLoaded('steps'))

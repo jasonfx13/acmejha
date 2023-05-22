@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
             $table->string('title')->unique();
+            $table->mediumText('description')->nullable();
             $table->string('created_by');
             $table->timestamps();
+            $table->softDeletes('deleted_at');
         });
     }
 

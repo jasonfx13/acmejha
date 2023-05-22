@@ -4,12 +4,14 @@ namespace App\Http\Controllers\api\v1;
 
 use App\Filters\V1\HazardsFilter;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreHazardRequest;
-use App\Http\Requests\UpdateHazardRequest;
+use App\Http\Requests\V1\BulkStoreHazards;
+use App\Http\Requests\V1\StoreHazardRequest;
+use App\Http\Requests\V1\UpdateHazardRequest;
 use App\Http\Resources\V1\HazardCollection;
 use App\Http\Resources\V1\HazardResource;
 use App\Models\Hazard;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class HazardController extends Controller
 {
@@ -22,26 +24,9 @@ class HazardController extends Controller
         $filter = new HazardsFilter();
         $filterItems = $filter->transform($request); // [['column', 'operator', 'value']]
 
-
-        // $includeSteps = $request->query('includeSteps');
-
-        $hazards = Hazard::where($filterItems)->with('safeguards');
-
-        //if($includeSteps) {
-           // $hazards = $hazards->with('safeguards');
-       // }
+        $hazards = Hazard::with('safeguards');
 
         return new HazardCollection($hazards->paginate()->appends($request->query()));
-
-//        if(count($queryItems) == 0) {
-//            return new HazardCollection(Hazard::all());
-//        } else {
-//            $hazards = Hazard::where($queryItems)->all();
-//            return new HazardCollection($hazards->appends($request->query()));
-//        }
-
-
-//        return new StepCollection(Job::paginate());
     }
 
     /**
@@ -58,6 +43,16 @@ class HazardController extends Controller
     public function store(StoreHazardRequest $request)
     {
         //
+    }
+
+    public function bulkStore(BulkStoreHazards $request) {
+        $bulk = collect($request->all())->map(function($arr, $key) {
+            return Arr::except($arr, ['stepId']);
+        });
+
+        Hazard::insert($bulk->toArray());
+
+        return $bulk;
     }
 
     /**
@@ -91,5 +86,6 @@ class HazardController extends Controller
     public function destroy(Hazard $hazard)
     {
         //
+        $hazard->delete();
     }
 }

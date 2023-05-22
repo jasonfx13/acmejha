@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('step_id');
             $table->string('title');
             $table->timestamps();
+            $table->softDeletes('deleted_at');
         });
     }
 

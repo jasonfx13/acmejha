@@ -3,9 +3,8 @@
 namespace App\Http\Requests\V1;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class UpdateJobRequest extends FormRequest
+class BulkUpdateSteps extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,28 +26,28 @@ class UpdateJobRequest extends FormRequest
         if($method == 'PUT') {
             return [
                 //
-                'title' => ['required'],
-                'description' => ['nullable'],
-                'createdBy' => ['required']
+                '*.title' => ['required'],
+                '*.jobId' => ['required']
             ];
         } else {
             return [
                 //
-                'title' => ['sometimes', 'required'],
-                'description' => ['nullable'],
-                'createdBy' => ['sometimes', 'required']
+                '*.title' => ['sometimes', 'required'],
+                '*.jobId' => ['sometimes', 'required']
             ];
         }
-
     }
 
     protected function prepareForValidation()
     {
-        if($this->createdBy) {
-            $this->merge([
-                'created_by' => $this->createdBy
-            ]);
+        $data = [];
+
+        foreach ($this->toArray() as $obj) {
+            $obj['job_id'] = $obj['jobId'] ?? null;
+
+            $data[] = $obj;
         }
 
+        $this->merge($data);
     }
 }

@@ -4,12 +4,14 @@ namespace App\Http\Controllers\api\v1;
 
 use App\Filters\V1\SafeguardsFilter;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreSafeguardRequest;
-use App\Http\Requests\UpdateSafeguardRequest;
+use App\Http\Requests\V1\BulkStoreSafeguards;
+use App\Http\Requests\V1\StoreSafeguardRequest;
+use App\Http\Requests\V1\UpdateSafeguardRequest;
 use App\Http\Resources\V1\SafeguardCollection;
 use App\Http\Resources\V1\SafeguardResource;
 use App\Models\Safeguard;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class SafeguardController extends Controller
 {
@@ -53,6 +55,16 @@ class SafeguardController extends Controller
         //
     }
 
+    public function bulkStore(BulkStoreSafeguards $request) {
+        $bulk = collect($request->all())->map(function($arr, $key) {
+            return Arr::except($arr, ['hazardId']);
+        });
+
+        Safeguard::insert($bulk->toArray());
+
+        return $bulk;
+    }
+
     /**
      * Display the specified resource.
      */
@@ -84,5 +96,6 @@ class SafeguardController extends Controller
     public function destroy(Safeguard $safeguard)
     {
         //
+        $safeguard->delete();
     }
 }
