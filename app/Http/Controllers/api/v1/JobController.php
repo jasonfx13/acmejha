@@ -9,9 +9,7 @@ use App\Http\Resources\V1\JobCollection;
 use App\Http\Resources\V1\JobResource;
 use App\Models\Job;
 use App\Filters\V1\JobsFilter;
-use App\Models\Step;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class JobController extends Controller
 {
@@ -32,7 +30,7 @@ class JobController extends Controller
             $jobs = Job::with(['steps']);
         }
 
-        return new JobCollection($jobs->paginate()->appends($request->query()));
+        return new JobCollection($jobs->paginate(100)->appends($request->query()));
 
     }
 
@@ -88,26 +86,7 @@ class JobController extends Controller
      */
     public function destroy(Job $job)
     {
-//        $safeguards[] = [];
-//        $hazards[] = [];
-//        $steps[] = [];
-//        //
-////        $job->hasMany(Step::class);
-//        $data = DB::table('jobs')
-//            ->leftJoin('steps', 'jobs.id', '=', 'steps.job_id')
-//            ->where('jobs.id', $job['id']);
-//        $steps = DB::table('steps')->where('job_id', $job['id']);
-//
-//
-//        forEach($steps as $step) {
-//            $hazards[] = DB::table('hazards')->where('step_id', $step->id);
-//            forEach($hazards as $hazard) {
-//                $safeguards[] = DB::table('safeguards')->where('hazard_id', $hazard->id);
-//            }
-//        }
-//
-//        $safeguards->delete();
-//        $hazards->delete();
+
 
         $job->delete();
     }

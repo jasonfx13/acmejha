@@ -26,7 +26,7 @@ class HazardController extends Controller
 
         $hazards = Hazard::with('safeguards');
 
-        return new HazardCollection($hazards->paginate()->appends($request->query()));
+        return new HazardCollection($hazards->paginate(100)->appends($request->query()));
     }
 
     /**

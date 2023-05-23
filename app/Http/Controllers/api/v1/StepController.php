@@ -27,15 +27,13 @@ class StepController extends Controller
         $filter = new StepsFilter();
         $filterItems = $filter->transform($request); // [['column', 'operator', 'value']]
         $includeSteps = $request->query('includeSteps');
-//        $steps = Step::with(['hazards']);
         $steps = Step::where($filterItems);
 
         if($includeSteps) {
             $steps = Step::with(['steps']);
         }
 
-//        return new StepCollection($steps->paginate()->appends($request->query()));
-        return new StepCollection($steps->paginate()->appends($request->query()));
+        return new StepCollection($steps->paginate(100)->appends($request->query()));
     }
 
     /**
