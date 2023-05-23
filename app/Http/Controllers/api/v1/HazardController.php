@@ -42,7 +42,7 @@ class HazardController extends Controller
      */
     public function store(StoreHazardRequest $request)
     {
-        //
+        return new HazardResource(Hazard::create($request->all()));
     }
 
     public function bulkStore(BulkStoreHazards $request) {
@@ -78,6 +78,7 @@ class HazardController extends Controller
     public function update(UpdateHazardRequest $request, Hazard $hazard)
     {
         //
+        $hazard->update($request->all());
     }
 
     /**

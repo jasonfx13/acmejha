@@ -107,7 +107,6 @@ class StepController extends Controller
     public function destroy(Step $step)
     {
         //
-        $step->hasMany(Hazard::class)->delete();
         $step->delete();
     }
 }

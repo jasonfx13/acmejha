@@ -52,7 +52,7 @@ class SafeguardController extends Controller
      */
     public function store(StoreSafeguardRequest $request)
     {
-        //
+        return new SafeguardResource(Safeguard::create($request->all()));
     }
 
     public function bulkStore(BulkStoreSafeguards $request) {
@@ -88,6 +88,7 @@ class SafeguardController extends Controller
     public function update(UpdateSafeguardRequest $request, Safeguard $safeguard)
     {
         //
+        $safeguard->update($request->all());
     }
 
     /**
