@@ -32,7 +32,7 @@ class StepController extends Controller
         if($includeSteps) {
             $steps = Step::with(['hazards', 'safeguards']);
         }
-        $steps = Step::with(['hazards', 'safeguards']);
+//        $steps = Step::with(['hazards', 'safeguards']);
         return new StepCollection($steps->paginate(100)->appends($request->query()));
     }
 

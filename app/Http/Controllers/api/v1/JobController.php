@@ -21,9 +21,7 @@ class JobController extends Controller
         //
         $filter = new JobsFilter();
         $filterItems = $filter->transform($request); // [['column', 'operator', 'value']]
-
         $includeSteps = $request->query('includeSteps');
-
         $jobs = Job::where($filterItems);
 
         if($includeSteps) {

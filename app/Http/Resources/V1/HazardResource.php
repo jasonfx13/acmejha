@@ -15,11 +15,5 @@ class HazardResource extends JsonResource
     public function toArray(Request $request): array
     {
         return parent::toArray($request);
-//        return [
-//            'id' => $this->id,
-//            'stepId' => $this->step_id,
-//            'title' => $this->title,
-//            'safeguards' => SafeguardResource::collection($this->safeguards)
-//        ];
     }
 }

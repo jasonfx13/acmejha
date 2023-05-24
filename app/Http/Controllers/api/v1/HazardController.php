@@ -23,7 +23,6 @@ class HazardController extends Controller
         //
         $filter = new HazardsFilter();
         $filterItems = $filter->transform($request); // [['column', 'operator', 'value']]
-
         $hazards = Hazard::where($filterItems);
 
         return new HazardCollection($hazards->paginate(100)->appends($request->query()));

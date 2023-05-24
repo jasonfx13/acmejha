@@ -14,14 +14,13 @@ class StepResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
-//        return [
-//            'id' => $this->id,
-//            'jobId' => $this->job_id,
-//            'title' => $this->title,
-//            'hazards' => HazardResource::collection($this->hazards),
-//            'safeguards' => HazardResource::collection($this->safeguards),
-//        ];
+        return [
+            'id' => $this->id,
+            'jobId' => $this->job_id,
+            'title' => $this->title,
+            'hazards' => HazardResource::collection($this->hazards),
+            'safeguards' => SafeguardResource::collection($this->safeguards)
+        ];
     }
 
 }

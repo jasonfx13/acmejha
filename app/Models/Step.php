@@ -25,4 +25,8 @@ class Step extends Model
     public function hazards() {
         return $this->hasMany(Hazard::class);
     }
+
+    public function safeguards() {
+        return $this->hasMany(Safeguard::class);
+    }
 }
