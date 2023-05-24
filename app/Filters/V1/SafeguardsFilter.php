@@ -8,13 +8,13 @@ use App\Filters\ApiFilter;
 class SafeguardsFilter extends ApiFilter {
     protected $allowedParams = [
         'title' => ['eq'],
-        'hazardId' => ['eq'],
+        'stepId' => ['eq'],
         'createdDate' => ['eq', 'gt', 'lt', 'lte', 'gte']
     ];
 
     protected $columnMap = [
         'createdDate' => 'created_at',
-        'hazardId' => 'hazard_id'
+        'stepId' => 'step_id'
     ];
 
     protected $operatorMap = [

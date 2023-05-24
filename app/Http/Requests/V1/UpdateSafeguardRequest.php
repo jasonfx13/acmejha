@@ -27,22 +27,22 @@ class UpdateSafeguardRequest extends FormRequest
             return [
                 //
                 'title' => ['required'],
-                'hazardId' => ['required']
+                'stepId' => ['required']
             ];
         } else {
             return [
                 //
                 'title' => ['sometimes', 'required'],
-                'hazardId' => ['sometimes', 'required']
+                'stepId' => ['sometimes', 'required']
             ];
         }
     }
 
     protected function prepareForValidation()
     {
-        if($this->hazardId) {
+        if($this->stepId) {
             $this->merge([
-                'hazard_id' => $this->hazardId
+                'step_id' => $this->stepId
             ]);
         }
 

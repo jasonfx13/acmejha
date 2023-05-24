@@ -17,7 +17,7 @@ class Safeguard extends Model
         'hazard_id'
     ];
 
-    public function hazard() {
-        return $this->belongsTo(Hazard::class);
+    public function step() {
+        return $this->belongsTo(Step::class);
     }
 }

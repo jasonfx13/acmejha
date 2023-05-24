@@ -12,7 +12,6 @@ class Hazard extends Model
     use HasFactory;
     use SoftDeletes, CascadeSoftDeletes;
     protected $dates = ['deleted_at'];
-    protected $cascadeDeletes = ['safeguards'];
     protected $fillable = [
         'title',
         'step_id'
@@ -22,7 +21,5 @@ class Hazard extends Model
         return $this->belongsTo(Step::class);
     }
 
-    public function safeguards() {
-        return $this->hasMany(Safeguard::class);
-    }
+
 }

@@ -14,12 +14,6 @@ class SafeguardResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-//        return parent::toArray($request);
-        return [
-            'id' => $this->id,
-            'title' => $this->title,
-            'hazardId' => $this->hazard_id,
-//            'dateEntered' => $this->created_at
-        ];
+        return parent::toArray($request);
     }
 }

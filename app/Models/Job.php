@@ -24,10 +24,10 @@ class Job extends Model
     }
 
     public function hazards() {
-        return $this->hasManyThrough(Hazard::class, Step::class, 'job_id', 'step_id', 'id');
+        return $this->hasManyThrough(Hazard::class, Step::class);
     }
 //
     public function safeguards() {
-        return $this->hasManyThrough(Safeguard::class, Hazard::class, 'step_id', 'hazard_id', 'id');
+        return $this->hasManyThrough(Safeguard::class, Step::class);
     }
 }

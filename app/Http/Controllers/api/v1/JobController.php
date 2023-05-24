@@ -21,16 +21,14 @@ class JobController extends Controller
         //
         $filter = new JobsFilter();
         $filterItems = $filter->transform($request); // [['column', 'operator', 'value']]
-
         $includeSteps = $request->query('includeSteps');
-
         $jobs = Job::where($filterItems);
 
         if($includeSteps) {
-            $jobs = Job::with(['steps']);
+            $jobs = Job::with(['steps', 'hazards', 'safeguards']);
         }
 
-        return new JobCollection($jobs->paginate(100)->appends($request->query()));
+        return new JobCollection($jobs->paginate()->appends($request->query()));
 
     }
 
