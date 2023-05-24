@@ -19,7 +19,8 @@ class StepCollection extends ResourceCollection
 //            'id' => $this->id,
 //            'jobId' => $this->job_id,
 //            'title' => $this->title,
-//            'hazards' => HazardResource::collection($this->hazards)
+//            'hazards' => HazardResource::collection($this->hazards),
+//            'safeguards' => HazardResource::collection($this->safeguards),
 //        ];
     }
 }

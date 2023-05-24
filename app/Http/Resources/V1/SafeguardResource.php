@@ -18,7 +18,7 @@ class SafeguardResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'hazardId' => $this->hazard_id,
+            'stepId' => $this->hazard_id,
 //            'dateEntered' => $this->created_at
         ];
     }

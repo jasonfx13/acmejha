@@ -45,7 +45,7 @@ class SafeguardController extends Controller
 
     public function bulkStore(BulkStoreSafeguards $request) {
         $bulk = collect($request->all())->map(function($arr, $key) {
-            return Arr::except($arr, ['hazardId']);
+            return Arr::except($arr, ['stepId']);
         });
 
         Safeguard::insert($bulk->toArray());

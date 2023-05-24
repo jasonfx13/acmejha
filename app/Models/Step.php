@@ -12,7 +12,7 @@ class Step extends Model
     use HasFactory;
     use SoftDeletes, CascadeSoftDeletes;
     protected $dates = ['deleted_at'];
-    protected $cascadeDeletes = ['hazards'];
+    protected $cascadeDeletes = ['hazards', 'safeguards'];
     protected $fillable = [
         'title',
         'job_id'

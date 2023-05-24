@@ -24,7 +24,7 @@ class BulkStoreSafeguards extends FormRequest
     {
         return [
             //
-            '*.hazardId' => ['required', 'integer'],
+            '*.stepId' => ['required', 'integer'],
             '*.title' => ['required', 'string']
         ];
     }
@@ -34,7 +34,7 @@ class BulkStoreSafeguards extends FormRequest
         $data = [];
 
         foreach ($this->toArray() as $obj) {
-            $obj['hazard_id'] = $obj['hazardId'] ?? null;
+            $obj['step_id'] = $obj['stepId'] ?? null;
 
             $data[] = $obj;
         }

@@ -14,15 +14,15 @@ class JobResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        //return parent::toArray($request);
+        return parent::toArray($request);
 
-        return [
-            'id' => $this->id,
-            'title' => $this->title,
-            'description' => $this->description,
-            'createdBy' => $this->created_by,
-            'dateEntered' => $this->created_at,
-            'steps' => StepResource::collection($this->whenLoaded('steps'))
-        ];
+//        return [
+//            'id' => $this->id,
+//            'title' => $this->title,
+//            'description' => $this->description,
+//            'createdBy' => $this->created_by,
+//            'dateEntered' => $this->created_at,
+//            'steps' => StepResource::collection($this->whenLoaded('steps'))
+//        ];
     }
 }

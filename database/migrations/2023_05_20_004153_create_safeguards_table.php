@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('safeguards', function (Blueprint $table) {
             $table->id();
-            $table->integer('hazard_id');
+            $table->integer('step_id');
             $table->string('title');
             $table->timestamps();
             $table->softDeletes('deleted_at');

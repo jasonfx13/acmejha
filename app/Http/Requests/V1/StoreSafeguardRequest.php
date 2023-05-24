@@ -24,14 +24,14 @@ class StoreSafeguardRequest extends FormRequest
         return [
             //
             'title' => ['required'],
-            'hazardId' => ['required']
+            'stepId' => ['required']
         ];
     }
 
     protected function prepareForValidation()
     {
         $this->merge([
-            'hazard_id' => $this->hazardId
+            'step_id' => $this->stepId
         ]);
     }
 
