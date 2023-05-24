@@ -20,7 +20,7 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 <li>Use the Code dropdown to download or clone this repository to a project folder on your computer</li>
 <li>Rename the .env.example file to .env</li>
 <li>Create a local MySQL database</li>
-<li>Enter corresponding values to the following values in .env file:
+<li>Populate the following keys with corresponding values (I left example values assigned, change values to match your local database server):
     <ul>
         <li>DB_HOST=127.0.0.1</li>
         <li>DB_PORT=3306</li>
@@ -29,7 +29,7 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
         <li>DB_PASSWORD=</li>
     </ul>
 </li>
-<li>Open a command line interface inside project directory and run the following commands:
+<li>Once database in setup, open a command line interface inside project directory and run the following commands:
     <ul>
         <li>composer install</li>
         <li>npm install</li>
@@ -44,6 +44,7 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 ## Resources
 
 <ul>
+<li><a href="https://laravel.com" target="_blank">Laravel</a></li>
 <li><a href="https://nodejs.org/en" target="_blank">NodeJS</a></li>
 <li><a href="https://getcomposer.org/" target="_blank">Componser</a></li>
 </ul>
