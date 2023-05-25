@@ -86,6 +86,6 @@ class JobController extends Controller
     {
 
 
-        $job->delete();
+        $job->forceDelete();
     }
 }
