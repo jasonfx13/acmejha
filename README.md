@@ -34,5 +34,5 @@ Acme Widgets API is build using the <a href="https://laravel.com/">Laravel Frame
 <ul>
 <li><a href="https://laravel.com" target="_blank">Laravel</a></li>
 <li><a href="https://nodejs.org/en" target="_blank">NodeJS</a></li>
-<li><a href="https://getcomposer.org/" target="_blank">Componser</a></li>
+<li><a href="https://getcomposer.org/" target="_blank">Composer</a></li>
 </ul>
