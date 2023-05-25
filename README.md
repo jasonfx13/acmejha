@@ -8,7 +8,7 @@ Acme Widgets API is build using the <a href="https://laravel.com/">Laravel Frame
 <li>Use the Code dropdown to download or clone this repository to a project folder on your computer</li>
 <li>Rename the .env.example file to .env</li>
 <li>Create a local MySQL database</li>
-<li>Populate the following keys with corresponding values (I left example values assigned, change values to match your local database server):
+<li>In the .env file, populate the following keys with corresponding values (I left example values assigned, change values to match your local database server):
     <ul>
         <li>DB_HOST=127.0.0.1</li>
         <li>DB_PORT=3306</li>
